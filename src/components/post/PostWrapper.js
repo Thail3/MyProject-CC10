@@ -26,6 +26,7 @@ function PostWrapper() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("img", img);
+
     try {
       setLoading(true);
       await axios.post("/posts", formData);
@@ -36,12 +37,43 @@ function PostWrapper() {
       setLoading(false);
     }
   };
+  //*สามารถอัพเดทโพสได้
+  const updatePost = async (title, img, id) => {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("img", img);
+    // console.log(formData);
+    try {
+      const idx = posts.findIndex((item) => item.id === id);
+      const newPost = [...posts];
+      const res = await axios.patch(`/posts/${id}`, formData);
+      newPost[idx] = res.data.updatedPost;
+      setPosts(newPost);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  //*สามารถลบโพสได้
+  const DeletePost = async (id) => {
+    try {
+      await axios.delete(`/posts/${id}`);
+      const newpost = posts.filter((item) => item.id !== id);
+      setPosts(newpost);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <>
       {loading && <Spinner />}
       <PostForm createPost={createPost} />;
-      <PostList posts={posts} />
+      <PostList
+        posts={posts}
+        fetchPost={fetchPost}
+        DeletePost={DeletePost}
+        updatePost={updatePost}
+      />
     </>
   );
 }

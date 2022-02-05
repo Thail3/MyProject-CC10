@@ -1,40 +1,50 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import profileImg from "../../assets/images/profileImg.png";
-import PostWrapper from "../post/PostWrapper";
+import { Link } from "react-router-dom";
 
 function Header() {
   const { logout, user } = useContext(AuthContext);
   return (
     <>
-      <header className="flex justify-between px-3 pt-3 ">
-        <div className="flex ">
+      <header className="px-3 pt-3 w-full relative">
+        <div className="md:flex  justify-between sm:flex sm:justify-between ">
           <div className="">
-            <i className="bi bi-list text-3xl text-primary " role="button"></i>
-          </div>
-          <div className="pl-10">
-            <i className="bi bi-house text-3xl text-primary" role="button"></i>
-          </div>
-          <div className="pl-10" onClick={() => logout()}>
-            <i
-              className="bi bi-box-arrow-right text-3xl text-primary"
+            {/* <i
+              className="bi bi-list text-3xl text-blue-500 hover:text-blue-300 lg:hidden"
               role="button"
+            ></i> */}
+
+            <Link to="/">
+              <i
+                className="bi bi-house text-3xl text-blue-500 hover:text-blue-400 pl-3"
+                role="button"
+              ></i>
+            </Link>
+            <Link to="/friend">
+              <i className="bi bi-person text-3xl text-blue-500 hover:text-blue-400 pl-3"></i>
+            </Link>
+            <i
+              className="bi bi-box-arrow-right text-3xl text-blue-500 hover:text-blue-400 pl-3"
+              role="button"
+              onClick={() => logout()}
             ></i>
           </div>
-        </div>
-        <p className="text-blue-500 font-bold text-xl">HOMECLUB</p>
-        <div className="flex">
-          <img
-            src={user.profileImg ?? profileImg}
-            width="40"
-            className="rounded-circle"
-            alt="user"
-            role="button"
-          />{" "}
-          <span className="font-bold pl-3 text-blue-500 mt-2">Profile</span>
+          {/* <span className="text-blue-500 font-bold text-xl ">HOMECLUB</span> */}
+          <div className="sm:flex">
+            <Link to="/profile">
+              <img
+                src={user.profileImg ?? profileImg}
+                width="40"
+                className="rounded-circle"
+                alt="user"
+                role="button"
+              />{" "}
+            </Link>
+            <span className="font-bold pl-3 text-blue-500 mt-2 ">Profile</span>
+          </div>
         </div>
       </header>
-      <PostWrapper />
     </>
   );
 }

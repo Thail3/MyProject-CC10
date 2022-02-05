@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import PostWrapper from "../components/post/PostWrapper";
 
 function Home() {
   return (
     <>
-      <div className="col-lg-6 col-md-9 m-auto mt-3 ">
+      <PostWrapper />
+      {/* <div className="col-lg-6 col-md-9 m-auto mt-3 ">
         <div className="mb-3">
           <div className="p-3">
             <div className="position-relative d-flex align-items-center">
@@ -153,7 +154,7 @@ function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CommentList from "./CommentList";
 import PostAction from "./PostAction";
 import CommentForm from "./CommentForm";
 import axios from "../../config/axios";
+import { AuthContext } from "../../contexts/AuthContext";
 
-function PostFooter({ post: { Comments, id } }) {
+function PostFooter({ post: { Comments, id, Likes }, fetchPost }) {
+  const { user } = useContext(AuthContext);
   const [comments, setComments] = useState(Comments);
-  // const [likes, setLikes] = useState(false);
+  const [likes, setLikes] = useState(Likes);
   const [showComment, setShowComment] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [pushLikes, setPushLikes] = useState(
+    Likes.findIndex((item) => item.userId === user.id) !== -1
+  );
+
+  const [numLikes, setNumLikes] = useState(likes.length);
 
   const toggleShowComment = () => {
     setShowComment((prev) => !prev);
@@ -16,6 +23,20 @@ function PostFooter({ post: { Comments, id } }) {
 
   const toggleShowForm = () => {
     setShowForm((prev) => !prev);
+  };
+
+  const likePost = async () => {
+    const res = await axios.post("/likes", { postId: id });
+    setPushLikes(true);
+    setNumLikes((prev) => prev + 1);
+    fetchPost();
+  };
+
+  const unlikePost = async () => {
+    const res = await axios.delete(`/likes/${id}`);
+    setPushLikes(false);
+    setNumLikes((prev) => prev - 1);
+    fetchPost();
   };
   //*function สร้างคอมเมนท์
   const createComment = async (title) => {
@@ -28,23 +49,31 @@ function PostFooter({ post: { Comments, id } }) {
       console.log(e);
     }
   };
-  //*function สร้างไลค์
-  // const createLike = async (id) => {
-  //   try {
-  //     const res = await axios.post("/likes", { id, postId: id });
-  //     setLikes()
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
+  //*function ลบคอมเมนท์
+  const deleteComment = async (id) => {
+    try {
+      await axios.delete(`/comments/${id}`);
+      const newComment = comments.filter((item) => item.id !== id);
+      setComments(newComment);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div className="p-2 ml-20">
       <PostAction
         numComment={comments.length}
+        numLikes={numLikes}
         toggleShowComment={toggleShowComment}
         toggleShowForm={toggleShowForm}
+        pushLikes={pushLikes}
+        likePost={likePost}
+        unlikePost={unlikePost}
       />
-      {showComment && <CommentList comments={comments} />}
+      {showComment && (
+        <CommentList comments={comments} deleteComment={deleteComment} />
+      )}
       {showForm && <CommentForm createComment={createComment} />}
     </div>
   );

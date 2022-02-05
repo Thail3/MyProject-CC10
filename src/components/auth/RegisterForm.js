@@ -56,7 +56,6 @@ function RegisterForm() {
                   FirstName
                 </label>
                 <input
-                  type="password"
                   className="form-control"
                   id="inputPassword2"
                   placeholder=""
@@ -73,7 +72,6 @@ function RegisterForm() {
                   LastName
                 </label>
                 <input
-                  type="password"
                   className="form-control"
                   id="inputPassword2"
                   placeholder=""
@@ -90,7 +88,6 @@ function RegisterForm() {
                   Email
                 </label>
                 <input
-                  type="password"
                   className="form-control"
                   id="inputPassword2"
                   placeholder=""
@@ -136,7 +133,7 @@ function RegisterForm() {
             </form>
 
             <div className="max-w-sm m-auto p-1.5 bg-blue-600 text-center rounded-full">
-              <button className="text-white">Login</button>
+              <button className="text-white">Register</button>
             </div>
           </div>
         </div>

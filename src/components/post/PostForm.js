@@ -9,6 +9,7 @@ function PostForm({ createPost }) {
   const [img, setImg] = useState("");
 
   const modalEl = useRef();
+
   const imgInputEl = useRef();
 
   const { user } = useContext(AuthContext);
@@ -84,7 +85,7 @@ function PostForm({ createPost }) {
                   <textarea
                     className="form-control mb-3"
                     rows="3"
-                    placeholder="What's on your mind?"
+                    placeholder="คุณกำลังคิดอะไรอยู่ . . ."
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                   />

@@ -23,13 +23,13 @@ function Login() {
             <form className="">
               <p className="mt-5">Username</p>
               {/* <label for="username">Username</label> */}
-              <div class="col-auto">
-                <label for="inputPassword2" class="visually-hidden">
+              <div className="col-auto">
+                <label for="inputPassword2" className="visually-hidden">
                   Username
                 </label>
                 <input
                   type="password"
-                  class="form-control"
+                  className="form-control"
                   id="inputPassword2"
                   placeholder=""
                 />
@@ -38,13 +38,13 @@ function Login() {
             <form className="pb-3">
               <p className="mt-2">Password</p>
               {/* <label for="password">Password</label> */}
-              <div class="col-auto">
-                <label for="inputPassword2" class="visually-hidden">
+              <div className="col-auto">
+                <label for="inputPassword2" className="visually-hidden">
                   Password
                 </label>
                 <input
                   type="password"
-                  class="form-control"
+                  className="form-control"
                   id="inputPassword2"
                   placeholder=""
                 />

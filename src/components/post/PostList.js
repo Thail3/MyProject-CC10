@@ -2,12 +2,18 @@ import React from "react";
 
 import PostCard from "./PostCard";
 
-function PostList({ posts }) {
+function PostList({ posts, fetchPost, DeletePost, updatePost }) {
   return (
     <>
-      <div className="card col-lg-6 col-md-9 m-auto ">
+      <div>
         {posts.map((item) => (
-          <PostCard key={item.id} post={item} />
+          <PostCard
+            key={item.id}
+            post={item}
+            fetchPost={fetchPost}
+            DeletePost={DeletePost}
+            updatePost={updatePost}
+          />
         ))}
       </div>
     </>

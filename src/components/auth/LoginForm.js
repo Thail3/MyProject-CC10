@@ -41,7 +41,6 @@ function LoginForm() {
                 Username
               </label>
               <input
-                type="password"
                 className="form-control"
                 id="inputPassword2"
                 placeholder=""

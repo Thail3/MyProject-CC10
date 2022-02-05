@@ -7,7 +7,6 @@ const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
-  // console.log(user);
 
   useEffect(() => {
     if (getToken()) {
@@ -38,8 +37,13 @@ function AuthContextProvider({ children }) {
     clearToken();
     setUser(null);
   };
+
+  const updateUser = (value) => {
+    setUser((prev) => ({ ...prev, ...value }));
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
