@@ -61,12 +61,15 @@ function ProfileHeader() {
           </button>
           <Link to="/home">
             <button className="rounded-full px-3 py-2 hover:bg-blue-50 inline-block border-2 border-blue-400 text-blue-400 font-bold">
-              <i class="bi bi-house-door-fill"></i>
+              <i className="bi bi-house-door-fill"></i>
             </button>
           </Link>
+          <Link to='/friend'>
+
           <button className="rounded-full px-3 py-2 ml-3 hover:bg-blue-50 inline-block border-2 border-blue-400 text-blue-400 font-bold ">
             <i className="bi bi-person-lines-fill"></i>
           </button>
+          </Link>
         </div>
       </div>
 

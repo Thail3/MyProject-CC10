@@ -15,7 +15,7 @@ function RouteConfig() {
     <Routes>
       {user ? (
         <Route path="/" element={<MainLayout />}>
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile/:id" element={<Profile />} />
           <Route path="friend" element={<Friend />} />
 
           <Route path="" element={<Home />} />

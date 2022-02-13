@@ -1,27 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import defaultImg from "../../assets/images/profileImg.png";
 import timeSince from "../../services/timeSince";
 
-function CommentItem({
-  comment: {
-    User: { profileImg, firstName, lastName },
-    createdAt,
-    title,
-    id,
-  },
-  deleteComment,
-}) {
+function CommentItem({ comment }, deleteComment) {
   const handleDeleteForm = (e) => {
     e.preventDefault();
-    deleteComment(id);
+    deleteComment(comment.id);
   };
   return (
     <div className="row mb-3 mt-3 ">
-      <Link to="/profile" className="col-md-1 p-0">
+      <Link to={`/profile/}`} className="col-md-1 p-0">
         {/* <button> */}
         <img
-          src={profileImg ?? defaultImg}
+          src={comment.User.profileImg ?? defaultImg}
           width="50"
           height="50"
           className="rounded-circle "
@@ -34,10 +26,12 @@ function CommentItem({
         <div className="d-flex justify-content-between">
           <div>
             <span className="fw-bold text-facebook">
-              {firstName} {lastName}
+              {comment.User.firstName} {comment.User.lastName}
             </span>
             <span className="ms-2 text-muted fw-bolder">&bull;</span>
-            <span className="ms-2 text-muted fs-7">{timeSince(createdAt)}</span>
+            <span className="ms-2 text-muted fs-7">
+              {timeSince(comment.createdAt)}
+            </span>
           </div>
 
           <div>
@@ -61,7 +55,7 @@ function CommentItem({
           </div>
         </div>
 
-        <span>{title}</span>
+        <span>{comment.title}</span>
       </div>
     </div>
   );

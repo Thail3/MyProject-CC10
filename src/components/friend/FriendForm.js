@@ -1,23 +1,35 @@
-import React from "react";
 import FriendAction from "./FriendAction";
+import defaultImg from "../../assets/images/profileImg.png";
 
-function FriendForm() {
+function FriendForm({
+  friend,
+  mode,
+  requestFriend,
+  acceptFriend,
+  deleteFriend,
+}) {
   return (
-    <div class="max-w-xl mt-3 ml-3 ">
-      <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-1">
-        <div class="flex justify-end px-4 pt-4"></div>
-        <div class="flex flex-col items-center pb-10">
+    <div className="max-w-xl mt-3 ml-10 ">
+      <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-1">
+        <div className="flex justify-end px-4 pt-4"></div>
+        <div className="flex flex-col items-center pb-10">
           <img
             className="mb-3 w-24 h-24 rounded-full shadow-lg "
-            src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
-            alt="Bonnie image"
+            src={friend.profileImg ?? defaultImg}
+            alt="Friendimage-Profile"
             role="button"
           />
 
-          <span class="text-sm text-gray-500 dark:text-gray-400 font-bold">
-            Jury Pear
+          <span className="text-sm text-gray-500 dark:text-gray-400 font-bold">
+            {friend.firstName} {friend.lastName}
           </span>
-          <FriendAction />
+          <FriendAction
+            friend={friend}
+            mode={mode}
+            requestFriend={requestFriend}
+            acceptFriend={acceptFriend}
+            deleteFriend={deleteFriend}
+          />
         </div>
       </div>
     </div>

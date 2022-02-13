@@ -1,19 +1,39 @@
 // import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileAbout from "./ProfileAbout";
 import ProfileContent from "./ProfileContent";
 import ProfileHeader from "./ProfileHeader";
+import axios from "../../config/axios";
 
 function ProfileWrapper() {
-  // const [users, setusers] = useState([]);
+  const [posts, setPosts] = useState([]);
+
+  const fetchPost = async () => {
+    try {
+      const res = await axios.get("/posts");
+      setPosts(res.data.posts);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchPost();
+  }, []);
+
   return (
     <>
       <div className="flex justify-center  md:mx-auto m-0 p-0 box-border">
         <div className="">
           <ProfileHeader />
 
-          <ProfileAbout />
+          {posts.map((item) => (
+            <ProfileAbout key={item.id} posts={item} />
+          ))}
 
-          <ProfileContent />
+          {/* <ProfileAbout /> */}
+
+          <ProfileContent posts={posts} />
         </div>
       </div>
     </>

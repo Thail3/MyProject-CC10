@@ -7,7 +7,7 @@ function MainLayout() {
 
   return (
     <>
-      {location.pathname === "/profile" ? <></> : <Header />}
+      {location.pathname.includes("profile") ? <></> : <Header />}
       <Outlet />
     </>
   );

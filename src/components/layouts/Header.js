@@ -32,7 +32,7 @@ function Header() {
           </div>
           {/* <span className="text-blue-500 font-bold text-xl ">HOMECLUB</span> */}
           <div className="sm:flex">
-            <Link to="/profile">
+            <Link to={`/profile/${user.id}`}>
               <img
                 src={user.profileImg ?? profileImg}
                 width="40"

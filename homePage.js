@@ -75,10 +75,10 @@ function HomePage() {
             <div className="mt-1 text-muted">
               <div className="dropdown">
                 <button className="btn text-muted" data-bs-toggle="dropdown">
-                  <i class="bi bi-trash"></i>
+                  <i className="bi bi-trash"></i>
                 </button>
                 <button className="btn text-muted" data-bs-toggle="dropdown">
-                  <i class="bi bi-pencil-square"></i>
+                  <i className="bi bi-pencil-square"></i>
                 </button>
                 <ul className="dropdown-menu">
                   <li>
@@ -108,11 +108,11 @@ function HomePage() {
             <hr className="" />
             <div className="d-flex justify-content-between align-items-center flex-grow-1">
               <div className="text-center flex-grow-1 text-facebook">
-                <i class="bi bi-heart"></i>
+                <i className="bi bi-heart"></i>
                 <small className="ms-2 fs-6">6 Like</small>
               </div>
               <div className="text-center flex-grow-1">
-                <i class="bi bi-chat-square-text"></i>
+                <i className="bi bi-chat-square-text"></i>
                 <small className="ms-2 fs-6 text-muted">10 Comment</small>
               </div>
             </div>

@@ -5,23 +5,24 @@ import { Modal } from "bootstrap";
 import { Link } from "react-router-dom";
 
 function PostHeader({
-  post: {
-    User: { firstName, lastName, profileImg },
-    title,
-    createdAt,
-    id,
-  },
+  post,
+  // : {
+  //   User: { firstName, lastName, profileImg },
+  //   title,
+  //   createdAt,
+  //   id,
+  // },
   DeletePost,
   updatePost,
 }) {
   const [modal, setModal] = useState(null);
   const [img, setImg] = useState("");
-  const [editTitle, seteditTitle] = useState(title);
+  const [editTitle, seteditTitle] = useState(post.title);
 
   const handleclickDeletePost = (e) => {
     e.preventDefault();
-    console.log(id);
-    DeletePost(id);
+    console.log(post.id);
+    DeletePost(post.id);
   };
 
   const newmodalEl = useRef();
@@ -35,7 +36,7 @@ function PostHeader({
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
-    await updatePost(editTitle, img, id);
+    await updatePost(editTitle, img, post.id);
     modal.hide();
     setImg("");
     seteditTitle("");
@@ -45,9 +46,9 @@ function PostHeader({
     <>
       <div className="d-flex justify-content-between py-2 px-3">
         <div className="d-flex flex-row align-items-center">
-          <Link to="/profile">
+          <Link to={`/profile/${post.User.id}`}>
             <img
-              src={profileImg ?? defaultImg}
+              src={post.User.profileImg ?? defaultImg}
               width="50"
               className="rounded-circle"
               alt="user"
@@ -56,9 +57,9 @@ function PostHeader({
           </Link>
           <div className="d-flex flex-column ms-2"></div>
           <span className="fw-bold text-facebook ml-2">
-            {firstName} {lastName}
+            {post.User.firstName} {post.User.lastName}
             <small className="text-muted fs-7 fw-light pl-3">
-              {timeSince(createdAt)}
+              {timeSince(post.createdAt)}
             </small>
           </span>
         </div>

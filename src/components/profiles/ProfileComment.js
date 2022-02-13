@@ -1,6 +1,7 @@
 import React from "react";
+import timeSince from "../../services/timeSince";
 
-function ProfileComment() {
+function ProfileComment({ posts }) {
   return (
     <>
       <div className="flex mt-2 ">
@@ -10,14 +11,17 @@ function ProfileComment() {
 
         <div className="ml-4">
           <p>
-            <span className="font-bold">Josh W</span>{" "}
-            <span className="text-gray-500"> · Jul 21</span>
+            <span className="font-bold">
+              {posts.User.firstName} {posts.User.lastName}
+            </span>{" "}
+            <span className="text-gray-500">
+              {" "}
+              · {timeSince(posts.createdAt)}
+            </span>
           </p>
 
-          <p>
-            Launched my new website a few weeks ago Rocket. Any feedback? Too
-            boring? Too basic? Not sure what else to add to it!
-          </p>
+          <p>{posts.title}</p>
+          <img className="" src={posts.img} />
         </div>
       </div>
     </>

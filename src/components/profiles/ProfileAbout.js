@@ -1,10 +1,21 @@
-import React from "react";
+import axios from "../../config/axios";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
-function ProfileAbout() {
+function ProfileAbout({ posts }) {
+  const [persons, setPersons] = useState({});
+  const { id } = useParams();
+  // console.log(id);
+
+  const fetchUser = async () => {
+    const res = await axios.get(`/users/${id}`);
+  };
   return (
     <>
       <div className="ml-4">
-        <p className="font-bold text-lg">Josh W</p>
+        <p className="font-bold text-lg">
+          {posts.User.firstName} {posts.User.lastName}
+        </p>
       </div>
 
       <div className="px-3 mt-3">

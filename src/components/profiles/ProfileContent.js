@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 import ProfileAction from "./ProfileAction";
 import ProfileComment from "./ProfileComment";
 
-function ProfileContent() {
+function ProfileContent({ posts }) {
+  const { user } = useContext(AuthContext);
+  const profilePost = posts.filter((item) => item.userId === user.id);
+
   return (
     <>
-      <div class="p-3">
-        <ProfileComment />
+      <div className="p-3">
+        {profilePost.map((item) => (
+          <ProfileComment key={item.id} posts={item} />
+        ))}
 
-        {/* <div class="flex flex-1 rounded-lg border ml-14 mt-3 cursor-pointer">
-          <div class="flex justify-center items-center py-8 px-12 bg-gray-100 border-r">
-            <i class="fas fa-newspaper text-3xl text-gray-500"></i>
+        {/* <div className="flex flex-1 rounded-lg border ml-14 mt-3 cursor-pointer">
+          <div className="flex justify-center items-center py-8 px-12 bg-gray-100 border-r">
+            <i className="fas fa-newspaper text-3xl text-gray-500"></i>
           </div>
 
-          <div class="flex-1 flex flex-col justify-center py-8 pr-16 pl-4">
+          <div className="flex-1 flex flex-col justify-center py-8 pr-16 pl-4">
             <p>Joshua Welford</p>
-            <p class="text-gray-500">Joshua Welford</p>
+            <p className="text-gray-500">Joshua Welford</p>
           </div>
         </div> */}
 
