@@ -49,8 +49,7 @@ function PostHeader({
           <Link to={`/profile/${post.User.id}`}>
             <img
               src={post.User.profileImg ?? defaultImg}
-              width="50"
-              className="rounded-circle"
+              className="rounded-full w-20 h-20 "
               alt="user"
               role="button"
             />

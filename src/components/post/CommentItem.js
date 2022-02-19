@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import defaultImg from "../../assets/images/profileImg.png";
 import timeSince from "../../services/timeSince";
@@ -14,9 +13,7 @@ function CommentItem({ comment }, deleteComment) {
         {/* <button> */}
         <img
           src={comment.User.profileImg ?? defaultImg}
-          width="50"
-          height="50"
-          className="rounded-circle "
+          className="rounded-circle w-12 h-12 "
           alt="user"
           role="button"
         />

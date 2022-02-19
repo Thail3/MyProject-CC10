@@ -9,7 +9,7 @@ function FriendForm({
   deleteFriend,
 }) {
   return (
-    <div className="max-w-xl mt-3 ml-10 ">
+    <div className="max-w-xl mt-20 ml-40 ">
       <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 p-1">
         <div className="flex justify-end px-4 pt-4"></div>
         <div className="flex flex-col items-center pb-10">

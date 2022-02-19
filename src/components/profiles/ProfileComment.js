@@ -4,12 +4,12 @@ import timeSince from "../../services/timeSince";
 function ProfileComment({ posts }) {
   return (
     <>
-      <div className="flex mt-2 ">
+      <div className="flex mt-2  ">
         <div>
           <img className="w-16 rounded-full" src="" alt="" />
         </div>
 
-        <div className="ml-4">
+        <div className="ml-4 ">
           <p>
             <span className="font-bold">
               {posts.User.firstName} {posts.User.lastName}
@@ -19,9 +19,20 @@ function ProfileComment({ posts }) {
               · {timeSince(posts.createdAt)}
             </span>
           </p>
-
-          <p>{posts.title}</p>
-          <img className="" src={posts.img} />
+          <div className="sm:h-100">
+            <p className="mb-2">{posts.title}</p>
+            <div className=" ">
+              <img
+                className="rounded-3 "
+                style={{
+                  // height: "500px",
+                  objectFit: "contain",
+                }}
+                src={posts.img}
+                alt="pic"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>

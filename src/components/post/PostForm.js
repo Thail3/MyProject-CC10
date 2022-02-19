@@ -34,12 +34,11 @@ function PostForm({ createPost }) {
       <div className="col-lg-6 col-md-9 m-auto mt-3 ">
         <div className="">
           <div className="p-3">
-            <div className="position-relative d-flex align-items-center">
+            <div className="position-relative d-flex align-items-center  ">
               <img
                 src={user.profileImg ?? defaultImg}
-                width="50"
-                height="50"
-                className="  rounded-full"
+                style={{ height: "50px", width: "60px" }}
+                className="rounded-full "
                 alt="user"
               />
               <input

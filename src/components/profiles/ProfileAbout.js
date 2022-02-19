@@ -1,15 +1,11 @@
-import axios from "../../config/axios";
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+// import axios from "../../config/axios";
+import React, { useContext } from "react";
+
+import { AuthContext } from "../../contexts/AuthContext";
 
 function ProfileAbout({ posts }) {
-  const [persons, setPersons] = useState({});
-  const { id } = useParams();
-  // console.log(id);
+  const { captionSub } = useContext(AuthContext);
 
-  const fetchUser = async () => {
-    const res = await axios.get(`/users/${id}`);
-  };
   return (
     <>
       <div className="ml-4">
@@ -19,11 +15,7 @@ function ProfileAbout({ posts }) {
       </div>
 
       <div className="px-3 mt-3">
-        <p>
-          DHIS2. Debian. React. Vue. Gatsby. PWAs. ES6. Node. Electron.
-          Tailwind. Working with a UK charity to bring EMRs to the Developing
-          World.
-        </p>
+        <p>{captionSub ? captionSub : posts.User.about}</p>
       </div>
       <div className="flex mt-3 border-b"></div>
     </>

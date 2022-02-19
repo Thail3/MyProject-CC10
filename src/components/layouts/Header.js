@@ -7,8 +7,8 @@ function Header() {
   const { logout, user } = useContext(AuthContext);
   return (
     <>
-      <header className="px-3 pt-3 w-full relative">
-        <div className="md:flex  justify-between sm:flex sm:justify-between ">
+      <header className="px-3 pt-3 w-full sticky top-0 z-10 ">
+        <div className="md:flex  justify-between sm:flex sm:justify-between  ">
           <div className="">
             {/* <i
               className="bi bi-list text-3xl text-blue-500 hover:text-blue-300 lg:hidden"
@@ -35,8 +35,7 @@ function Header() {
             <Link to={`/profile/${user.id}`}>
               <img
                 src={user.profileImg ?? profileImg}
-                width="40"
-                className="rounded-circle"
+                className="rounded-circle w-10 h-10"
                 alt="user"
                 role="button"
               />{" "}

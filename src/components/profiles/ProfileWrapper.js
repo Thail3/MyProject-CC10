@@ -7,7 +7,8 @@ import axios from "../../config/axios";
 
 function ProfileWrapper() {
   const [posts, setPosts] = useState([]);
-
+  // console.log(posts[0].about);
+  //
   const fetchPost = async () => {
     try {
       const res = await axios.get("/posts");
@@ -23,9 +24,9 @@ function ProfileWrapper() {
 
   return (
     <>
-      <div className="flex justify-center  md:mx-auto m-0 p-0 box-border">
+      <div className="m-auto flex justify-center  md:mx-auto p-0 box-border col-lg-6 ">
         <div className="">
-          <ProfileHeader />
+          <ProfileHeader posts={posts} />
 
           {posts.map((item) => (
             <ProfileAbout key={item.id} posts={item} />

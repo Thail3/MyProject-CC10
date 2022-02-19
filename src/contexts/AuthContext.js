@@ -7,6 +7,8 @@ const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [editAbout, setEditAbout] = useState("");
+  const [captionSub, setCaptionSub] = useState("");
 
   useEffect(() => {
     if (getToken()) {
@@ -43,7 +45,18 @@ function AuthContextProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, updateUser }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        updateUser,
+        editAbout,
+        setEditAbout,
+        captionSub,
+        setCaptionSub,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
