@@ -5,7 +5,7 @@ import CommentForm from "./CommentForm";
 import axios from "../../config/axios";
 import { AuthContext } from "../../contexts/AuthContext";
 
-function PostFooter({ post: { Comments, id, Likes }, fetchPost }) {
+function PostFooter({ posts: { Comments, Likes, id }, fetchPost }) {
   const { user } = useContext(AuthContext);
   const [comments, setComments] = useState(Comments);
   const [likes, setLikes] = useState(Likes);
@@ -59,7 +59,18 @@ function PostFooter({ post: { Comments, id, Likes }, fetchPost }) {
       console.log(e);
     }
   };
-
+  //*function แก้ไขคอมเมนท์
+  const updateComment = async (title, id) => {
+    try {
+      const idx = comments.findIndex((item) => item.id === id);
+      const newComment = [...comments];
+      const res = await axios.patch(`/comments/${id}`, { title });
+      newComment[idx] = res.data.updateComment;
+      setComments(newComment);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className="p-2 ml-20">
       <PostAction
@@ -72,7 +83,11 @@ function PostFooter({ post: { Comments, id, Likes }, fetchPost }) {
         unlikePost={unlikePost}
       />
       {showComment && (
-        <CommentList comments={comments} deleteComment={deleteComment} />
+        <CommentList
+          comments={comments}
+          deleteComment={deleteComment}
+          updateComment={updateComment}
+        />
       )}
       {showForm && <CommentForm createComment={createComment} />}
     </div>

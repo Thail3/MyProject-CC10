@@ -25,7 +25,8 @@ function CommentForm({ createComment }) {
       <div className="position-relative d-flex align-items-center pr-2">
         <img
           src={user.profileImg ?? defaultImg}
-          className="rounded-circle w-12 h-12 mr-3"
+          className="rounded-circle mr-3 mt-2"
+          style={{ width: "55px", height: "50px" }}
           alt="user"
         />
         <input

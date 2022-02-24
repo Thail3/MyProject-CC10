@@ -1,11 +1,12 @@
 import defaultImg from "../../assets/images/profileImg.png";
 import timeSince from "../../services/timeSince";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { Modal } from "bootstrap";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function PostHeader({
-  post,
+  posts,
   // : {
   //   User: { firstName, lastName, profileImg },
   //   title,
@@ -17,16 +18,20 @@ function PostHeader({
 }) {
   const [modal, setModal] = useState(null);
   const [img, setImg] = useState("");
-  const [editTitle, seteditTitle] = useState(post.title);
+  const [editTitle, seteditTitle] = useState(posts.title);
+  const { user } = useContext(AuthContext);
 
   const handleclickDeletePost = (e) => {
     e.preventDefault();
-    console.log(post.id);
-    DeletePost(post.id);
+    console.log(posts.id);
+    DeletePost(posts.id);
   };
 
   const newmodalEl = useRef();
   const imgInputEl = useRef();
+
+  console.log(posts, "postHeader-post");
+  console.log(user, "postHeader-user");
 
   const handleClickEdit = () => {
     const modalobj = new Modal(newmodalEl.current);
@@ -36,7 +41,7 @@ function PostHeader({
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
-    await updatePost(editTitle, img, post.id);
+    await updatePost(editTitle, img, posts.id);
     modal.hide();
     setImg("");
     seteditTitle("");
@@ -46,19 +51,20 @@ function PostHeader({
     <>
       <div className="d-flex justify-content-between py-2 px-3">
         <div className="d-flex flex-row align-items-center">
-          <Link to={`/profile/${post.User.id}`}>
+          <Link to={`/profile/${posts.User.id}`}>
             <img
-              src={post.User.profileImg ?? defaultImg}
-              className="rounded-full w-20 h-20 "
+              src={posts.User.profileImg ?? defaultImg}
+              className="rounded-full  "
+              style={{ width: "50px", height: "50px" }}
               alt="user"
               role="button"
             />
           </Link>
           <div className="d-flex flex-column ms-2"></div>
           <span className="fw-bold text-facebook ml-2">
-            {post.User.firstName} {post.User.lastName}
+            {posts.User.firstName} {posts.User.lastName}
             <small className="text-muted fs-7 fw-light pl-3">
-              {timeSince(post.createdAt)}
+              {timeSince(posts.createdAt)}
             </small>
           </span>
         </div>
@@ -69,9 +75,13 @@ function PostHeader({
               data-bs-toggle="dropdown"
               disabled
             ></button>
-            <button className="btn text-muted" data-bs-toggle="dropdown">
-              <i className="bi bi-three-dots"></i>
-            </button>
+            {posts.User.id === user.id ? (
+              <button className="btn text-muted" data-bs-toggle="dropdown">
+                <i className="bi bi-three-dots"></i>
+              </button>
+            ) : (
+              <></>
+            )}
             <ul className="dropdown-menu">
               <li>
                 <button className="dropdown-item" onClick={handleClickEdit}>

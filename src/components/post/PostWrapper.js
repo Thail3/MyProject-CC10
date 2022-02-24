@@ -4,7 +4,7 @@ import PostForm from "./PostForm";
 import PostList from "./PostList";
 import Spinner from "../utils/Spinner";
 
-function PostWrapper() {
+function PostWrapper({ filteredResults, searchItems }) {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 

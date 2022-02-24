@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function LoginForm() {
   const [emailOrPhoneNumber, setEmailOrPhoneNumber] = useState("");
@@ -14,9 +16,43 @@ function LoginForm() {
     login(emailOrPhoneNumber, password);
   };
 
+  const notify = () => {
+    if (!emailOrPhoneNumber) {
+      toast.warn("กรุณาป้อน Email or Phonenumber", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (!password) {
+      toast.warn("กรุณาป้อน Password", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.success("Login sucess!)", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
   return (
     <form onSubmit={handleSubmitLogin}>
-      <div className="bg-blue-600 rounded-xl">
+      <div className="bg-blue-600 rounded-xl ">
         <div className="flex justify-around py-4">
           <div className="text-white no-underline">Login</div>
           <button
@@ -67,7 +103,20 @@ function LoginForm() {
           </div>
 
           <div className="max-w-sm m-auto p-1.5 mt-3 bg-blue-600 text-center rounded-full">
-            <button className="text-white">Login</button>
+            <button className="text-white" onClick={notify}>
+              Login
+            </button>
+            <ToastContainer
+              position="top-right"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-function PostContent({ post: { title, img } }) {
+function PostContent({ posts: { title, img } }) {
   return (
     <div>
       {title && <p className="text-justify pl-20 mr-2">{title}</p>}

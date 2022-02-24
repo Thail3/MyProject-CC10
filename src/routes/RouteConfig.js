@@ -5,21 +5,26 @@ import PublicLayout from "../components/layouts/PublicLayout";
 import { AuthContext } from "../contexts/AuthContext";
 import Friend from "../pages/Friend";
 import Home from "../pages/Home";
+import LiveChat from "../pages/LiveChat";
 import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import Register from "../pages/Register";
 
 function RouteConfig() {
-  const { user } = useContext(AuthContext);
+  const { user, role } = useContext(AuthContext);
+  if (role === "user" && !user) {
+    return <></>;
+  }
   return (
     <Routes>
-      {user ? (
+      {role === "user" ? (
         <Route path="/" element={<MainLayout />}>
           <Route path="profile/:id" element={<Profile />} />
           <Route path="friend" element={<Friend />} />
 
           <Route path="" element={<Home />} />
           <Route path="*" element={<Navigate to="/" />} />
+          <Route path="live-chat" element={<LiveChat />} />
         </Route>
       ) : (
         <Route path="/" element={<PublicLayout />}>

@@ -21,17 +21,21 @@ function ProfileComment({ posts }) {
           </p>
           <div className="sm:h-100">
             <p className="mb-2">{posts.title}</p>
-            <div className=" ">
-              <img
-                className="rounded-3 "
-                style={{
-                  // height: "500px",
-                  objectFit: "contain",
-                }}
-                src={posts.img}
-                alt="pic"
-              />
-            </div>
+            {posts.img ? (
+              <div className=" ">
+                <img
+                  className="rounded-3 "
+                  style={{
+                    // height: "500px",
+                    objectFit: "contain",
+                  }}
+                  src={posts.img}
+                  alt="pic"
+                />
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

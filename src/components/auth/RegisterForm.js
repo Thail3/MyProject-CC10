@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../config/axios";
 import { ErrorContext } from "../../contexts/ErrorContext";
+import { ToastContainer, toast } from "react-toastify";
 
 function RegisterForm() {
   const [firstName, setFirstName] = useState("");
@@ -28,6 +29,70 @@ function RegisterForm() {
       navigate("/");
     } catch (err) {
       setError(err.response.data.message);
+    }
+  };
+
+  const notify = () => {
+    if (!firstName) {
+      toast.warn("กรุณาป้อนชื่อต้นของคุณ", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (!lastName) {
+      toast.warn("กรุณาป้อนนามสกุลของคุณ", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (!emailOrPhoneNumber) {
+      toast.warn("กรุณาป้อน Email or Phonenumber", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (!password) {
+      toast.warn("กรุณาป้อน password", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (!confirmPassword) {
+      toast.warn("กรุณาป้อน password", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else {
+      toast.success("Register sucess!)", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
   return (
@@ -132,8 +197,21 @@ function RegisterForm() {
               </div>
             </form>
 
-            <div className="max-w-sm m-auto p-1.5 bg-blue-600 text-center rounded-full">
-              <button className="text-white">Register</button>
+            <div className="max-w-sm m-auto mt-3 p-1.5 bg-blue-600 text-center rounded-full">
+              <button className="text-white" onClick={notify}>
+                Register
+              </button>
+              <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
             </div>
           </div>
         </div>

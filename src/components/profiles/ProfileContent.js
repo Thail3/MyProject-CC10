@@ -1,16 +1,14 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
 import ProfileAction from "./ProfileAction";
 import ProfileComment from "./ProfileComment";
 
 function ProfileContent({ posts }) {
-  const { user } = useContext(AuthContext);
-  const profilePost = posts.filter((item) => item.userId === user.id);
+  console.log(posts);
+  // const profilePost = posts.filter((item) => item.userId === user.id);
 
   return (
     <>
       <div className="p-3">
-        {profilePost.map((item) => (
+        {posts.map((item) => (
           <ProfileComment key={item.id} posts={item} />
         ))}
 

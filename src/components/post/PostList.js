@@ -9,7 +9,7 @@ function PostList({ posts, fetchPost, DeletePost, updatePost }) {
         {posts.map((item) => (
           <PostCard
             key={item.id}
-            post={item}
+            posts={item}
             fetchPost={fetchPost}
             DeletePost={DeletePost}
             updatePost={updatePost}

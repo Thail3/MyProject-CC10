@@ -37,7 +37,7 @@ function PostForm({ createPost }) {
             <div className="position-relative d-flex align-items-center  ">
               <img
                 src={user.profileImg ?? defaultImg}
-                style={{ height: "50px", width: "60px" }}
+                style={{ height: "50px", width: "55px" }}
                 className="rounded-full "
                 alt="user"
               />

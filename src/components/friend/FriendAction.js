@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ALL_FRIEND, REQUEST_FRIEND, FIND_FRIEND } from "../../config/data";
 
 function FriendAction({
@@ -37,9 +38,13 @@ function FriendAction({
       >
         Delete
       </button>
-      {/* <button className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-black bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-500">
-        Message
-      </button> */}
+      {mode === ALL_FRIEND && (
+        <button className="inline-flex items-center py-2 px-4 text-sm font-medium text-center text-black bg-white rounded-lg border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-500">
+          <Link to="/live-chat">
+            <p>Message</p>
+          </Link>
+        </button>
+      )}
     </div>
   );
 }

@@ -1,7 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import axios from "../config/axios";
-import { clearToken, setToken, getToken } from "../services/localStorage";
+import {
+  clearToken,
+  setToken,
+  getToken,
+  getRole,
+} from "../services/localStorage";
 
 const AuthContext = createContext();
 
@@ -9,6 +14,7 @@ function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [editAbout, setEditAbout] = useState("");
   const [captionSub, setCaptionSub] = useState("");
+  const [role, setRole] = useState(getRole());
 
   useEffect(() => {
     if (getToken()) {
@@ -31,6 +37,7 @@ function AuthContextProvider({ children }) {
 
       setToken(res.data.token);
       setUser(res.data.user);
+      setRole("user");
       navigate("/");
     } catch (e) {}
   };
@@ -38,6 +45,7 @@ function AuthContextProvider({ children }) {
   const logout = () => {
     clearToken();
     setUser(null);
+    setRole("guest");
   };
 
   const updateUser = (value) => {
@@ -55,6 +63,7 @@ function AuthContextProvider({ children }) {
         setEditAbout,
         captionSub,
         setCaptionSub,
+        role,
       }}
     >
       {children}

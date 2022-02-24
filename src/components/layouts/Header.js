@@ -1,10 +1,47 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import profileImg from "../../assets/images/profileImg.png";
 import { Link } from "react-router-dom";
+import SearchFilter from "./SearchFilter";
+import axios from "../../config/axios";
 
 function Header() {
   const { logout, user } = useContext(AuthContext);
+  const [allMember, setAllMember] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  console.log(user);
+
+  const fetchMember = async () => {
+    try {
+      const res = await axios.get("/users/alluser");
+      setAllMember(res.data.allUser);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchMember();
+  }, []);
+
+  console.log(allMember);
+
+  const searchItems = (searchValue) => {
+    setSearchInput(searchValue);
+    if (searchInput !== "") {
+      const filteredData = allMember.filter((item) => {
+        return Object.values(item)
+          .join("")
+          .toLowerCase()
+          .includes(searchInput.toLowerCase());
+      });
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(allMember);
+    }
+  };
+
   return (
     <>
       <header className="px-3 pt-3 w-full sticky top-0 z-10 ">
@@ -22,15 +59,26 @@ function Header() {
               ></i>
             </Link>
             <Link to="/friend">
-              <i className="bi bi-person text-3xl text-blue-500 hover:text-blue-400 pl-3"></i>
+              <i
+                className="bi bi-person text-3xl text-blue-500 hover:text-blue-400 pl-3"
+                role="button"
+              ></i>
             </Link>
+            <i
+              className="bi bi-search text-2xl text-blue-500 hover:text-blue-400 pl-3"
+              data-bs-toggle="collapse"
+              href="#multiCollapseExample1"
+              role="button"
+              aria-expanded="false"
+              aria-controls="multiCollapseExample1"
+            ></i>
             <i
               className="bi bi-box-arrow-right text-3xl text-blue-500 hover:text-blue-400 pl-3"
               role="button"
               onClick={() => logout()}
             ></i>
           </div>
-          {/* <span className="text-blue-500 font-bold text-xl ">HOMECLUB</span> */}
+
           <div className="sm:flex">
             <Link to={`/profile/${user.id}`}>
               <img
@@ -43,6 +91,14 @@ function Header() {
             <span className="font-bold pl-3 text-blue-500 mt-2 ">Profile</span>
           </div>
         </div>
+
+        <SearchFilter
+          allMember={allMember}
+          searchItems={searchItems}
+          filteredResults={filteredResults}
+          searchInput={searchInput}
+          setFilteredResults={setFilteredResults}
+        />
       </header>
     </>
   );

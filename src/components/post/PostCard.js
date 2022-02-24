@@ -2,17 +2,18 @@ import PostContent from "./PostContent";
 import PostFooter from "./PostFooter";
 import PostHeader from "./PostHeader";
 
-function PostCard({ post, fetchPost, DeletePost, updatePost }) {
+function PostCard({ posts, fetchPost, DeletePost, updatePost }) {
+  console.log(posts);
   return (
     <>
       <div className="card col-lg-6 col-md-9 m-auto mt-3">
         <PostHeader
-          post={post}
+          posts={posts}
           DeletePost={DeletePost}
           updatePost={updatePost}
         />
-        <PostContent post={post} />
-        <PostFooter post={post} fetchPost={fetchPost} />
+        <PostContent posts={posts} />
+        <PostFooter posts={posts} fetchPost={fetchPost} />
       </div>
     </>
   );
