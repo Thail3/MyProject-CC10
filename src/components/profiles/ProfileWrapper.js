@@ -52,7 +52,7 @@ function ProfileWrapper() {
   useEffect(() => {
     fetchMyPost();
     fetchUser();
-  }, [id]);
+  }, [id, person]);
 
   return (
     <>

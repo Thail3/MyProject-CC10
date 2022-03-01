@@ -4,7 +4,8 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 
 function ProfileAbout({ person }) {
-  const { captionSub } = useContext(AuthContext);
+  const { captionSub, user } = useContext(AuthContext);
+  console.log(user);
 
   return (
     <>
@@ -15,7 +16,8 @@ function ProfileAbout({ person }) {
       </div>
 
       <div className="px-3 mt-3">
-        <p>{captionSub ? captionSub : person.about}</p>
+        {/* <p>{captionSub ? captionSub : person.about}</p> */}
+        <p>{captionSub ? person.about : person.about}</p>
       </div>
       <div className="flex mt-3 border-b"></div>
     </>

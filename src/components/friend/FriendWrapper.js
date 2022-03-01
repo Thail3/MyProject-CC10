@@ -45,7 +45,10 @@ function FriendWrapper() {
   };
   return (
     <>
-      <div className="md-container-8 flex flex-wrap ">
+      <div
+        className="md-container-8 flex flex-wrap justify-center"
+        style={{ marginLeft: "130px" }}
+      >
         <FriendNavbar changeMode={changeMode} mode={mode} />
         {friends.map((item) => (
           <FriendForm

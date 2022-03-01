@@ -2,7 +2,7 @@ import RouteConfig from "./routes/RouteConfig";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App ">
       <RouteConfig />
     </div>
   );

@@ -10,7 +10,6 @@ import defaultBackgroundImg from "../../assets/images/backgroundImg1.jpg";
 import ProfileAbout from "./ProfileAbout";
 
 function ProfileHeader({ posts, person }) {
-  const [imgInput, setImgInput] = useState(null);
   const [modal, setModal] = useState(null);
   const [loading, setLoading] = useState(false);
   const [backgroundUpdate, setBackgroundUpdate] = useState(null);
@@ -22,8 +21,15 @@ function ProfileHeader({ posts, person }) {
   const modelBg = useRef();
   const inputPF = useRef();
   const inputBg = useRef();
-  const { user, updateUser, editAbout, setEditAbout, setCaptionSub } =
-    useContext(AuthContext);
+  const {
+    user,
+    updateUser,
+    editAbout,
+    setEditAbout,
+    setCaptionSub,
+    imgInput,
+    setImgInput,
+  } = useContext(AuthContext);
   // console.log(user);
 
   const handleClickProfile = () => {
@@ -147,9 +153,9 @@ function ProfileHeader({ posts, person }) {
         <div>
           {+id === user.id ? (
             <>
-              <button>
+              {/* <button>
                 <i className="bi bi-justify rounded-full px-3 py-2 mt-3 mr-3  hover:bg-blue-50  border-2 border-blue-400 text-blue-400 font-bold "></i>
-              </button>
+              </button> */}
               <button
                 className="rounded-full px-3 py-2 mt-3 mr-3 transition hover:bg-blue-50 inline-block border-2 border-blue-400 text-blue-400 font-bold ml-5"
                 onClick={handleClickBackground}
@@ -172,7 +178,7 @@ function ProfileHeader({ posts, person }) {
           ) : (
             <></>
           )}
-          <Link to="/home">
+          <Link to="/">
             <button className="rounded-full px-3 py-2 ml-3  mt-3 mr-3 hover:bg-blue-50 inline-block border-2 border-blue-400 text-blue-400 font-bold">
               <i className="bi bi-house-door-fill"></i>
             </button>
@@ -183,60 +189,64 @@ function ProfileHeader({ posts, person }) {
       <ProfileAbout person={person} />
       {/* ))} */}
 
-      <div className="modal" ref={modelPF}>
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Edit Profile Picture</h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                onClick={() => setImgInput(null)}
-              ></button>
-            </div>
-            <div className="modal-body">
-              <div className="mt-4 mb-5 d-flex justify-content-center ">
-                <input
-                  type="file"
-                  className="d-none"
-                  ref={inputPF}
-                  onChange={(e) => {
-                    if (e.target.files[0]) setImgInput(e.target.files[0]);
-                    setProPicture(true);
-                  }}
-                />
-                <img
-                  src={
-                    proPicture
-                      ? URL.createObjectURL(imgInput)
-                      : person.profileImg ?? defaultImg
-                  }
-                  className="rounded-full "
-                  style={{
-                    objectFit: "cover",
-                    height: "300px",
-                    width: "300px",
-                  }}
-                  alt="user"
-                  role="button"
-                  onClick={() => inputPF.current.click()}
-                />
-              </div>
-              <div className="d-grid">
+      {+id === user.id ? (
+        <div className="modal" ref={modelPF}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Edit Profile Picture</h5>
                 <button
                   type="button"
-                  className="btn text-sky-600 hover:text-blue-800 hover:bg-blue-50 inline-block border-2"
-                  disabled={!imgInput}
-                  onClick={handleClikeUpdateProfile}
-                >
-                  Update
-                </button>
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  onClick={() => setImgInput(null)}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="mt-4 mb-5 d-flex justify-content-center ">
+                  <input
+                    type="file"
+                    className="d-none"
+                    ref={inputPF}
+                    onChange={(e) => {
+                      if (e.target.files[0]) setImgInput(e.target.files[0]);
+                      setProPicture(true);
+                    }}
+                  />
+                  <img
+                    src={
+                      proPicture
+                        ? URL.createObjectURL(imgInput)
+                        : person.profileImg ?? defaultImg
+                    }
+                    className="rounded-full "
+                    style={{
+                      objectFit: "cover",
+                      height: "300px",
+                      width: "300px",
+                    }}
+                    alt="user"
+                    role="button"
+                    onClick={() => inputPF.current.click()}
+                  />
+                </div>
+                <div className="d-grid">
+                  <button
+                    type="button"
+                    className="btn text-sky-600 hover:text-blue-800 hover:bg-blue-50 inline-block border-2"
+                    disabled={!imgInput}
+                    onClick={handleClikeUpdateProfile}
+                  >
+                    Update
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
 
       <div className="modal " ref={modelBg}>
         <div className="modal-dialog">

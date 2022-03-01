@@ -3,16 +3,19 @@ import { AuthContext } from "../../contexts/AuthContext";
 import defaultImg from "../../assets/images/profileImg.png";
 import { Modal } from "bootstrap";
 
-function PostForm({ createPost }) {
+function PostForm({ createPost, posts }) {
   const [modal, setModal] = useState(null);
   const [title, setTitle] = useState("");
   const [img, setImg] = useState("");
+
+  console.log(posts);
 
   const modalEl = useRef();
 
   const imgInputEl = useRef();
 
   const { user } = useContext(AuthContext);
+  console.log(user);
 
   const handleClickInput = () => {
     const modalobj = new Modal(modalEl.current);

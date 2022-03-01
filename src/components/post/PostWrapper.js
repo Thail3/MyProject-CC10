@@ -67,7 +67,7 @@ function PostWrapper({ filteredResults, searchItems }) {
   return (
     <>
       {loading && <Spinner />}
-      <PostForm createPost={createPost} />;
+      <PostForm createPost={createPost} posts={posts} />;
       <PostList
         posts={posts}
         fetchPost={fetchPost}

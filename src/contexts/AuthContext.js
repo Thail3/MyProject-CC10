@@ -11,19 +11,31 @@ import {
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const [editAbout, setEditAbout] = useState("");
   const [captionSub, setCaptionSub] = useState("");
   const [role, setRole] = useState(getRole());
+  const [imgInput, setImgInput] = useState(null);
+
+  const fetchUser = async () => {
+    try {
+      const res = await axios.get("/users/me");
+      console.log(res.data.user);
+      setUser(res.data.user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    if (getToken()) {
-      axios
-        .get("/users/me")
-        .then((res) => setUser(res.data.user))
-        .catch((err) => console.log(err));
-    }
-  }, []);
+    // if (getToken()) {
+    //   axios
+    //     .get("/users/me")
+    //     .then((res) => setUser(res.data.user))
+    //     .catch((err) => console.log(err));
+    // }
+    fetchUser();
+  }, [imgInput, captionSub]);
 
   const navigate = useNavigate();
 
@@ -64,6 +76,8 @@ function AuthContextProvider({ children }) {
         captionSub,
         setCaptionSub,
         role,
+        imgInput,
+        setImgInput,
       }}
     >
       {children}
