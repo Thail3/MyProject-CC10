@@ -137,13 +137,14 @@ function ProfileHeader({ posts, person }) {
               width: "100px",
               height: "100px",
             }}
-            src={
-              imgInput
-                ? imgInput
-                : person.profileImg
-                ? person.profileImg
-                : defaultImg
-            }
+            // src={
+            //   imgInput
+            //     ? imgInput
+            //     : person.profileImg
+            //     ? person.profileImg
+            //     : defaultImg
+            // }
+            src={person.profileImg ?? defaultImg}
             alt="ProfilePic"
             role="button"
             onClick={handleClickProfile}
